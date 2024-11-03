@@ -38,7 +38,7 @@
 
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">Due Date</label>
-                        <input v-model="newTask.due_date" type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                        <input v-model="newTask.due_date" type="date" :min="today" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                     </div>
 
                     <div class="mb-4">
@@ -310,7 +310,7 @@ export default {
         const isSubmitting = ref(false);
         const showArchivedTasksModal = ref(false);
         const taskFiles = ref([]);
-
+        const today = ref(new Date().toISOString().split('T')[0]);
         const handleFileUpload = (event) => {
             taskFiles.value = Array.from(event.target.files);
         };
@@ -601,7 +601,8 @@ export default {
             applyPriorityFilter,
             applyDueDateFilter,
             applyFilters,
-            clearFilters
+            clearFilters,
+            today
         };
     }
 };
